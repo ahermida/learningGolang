@@ -29,22 +29,34 @@ func NewStack() *Stack {
 /**
   Flesh out the Stack struct
 */
-func (s *Stack) Push(item interface{}) {
+
+/**  Push Method, add to front*/
+func (s *Stack) Push(item interface{}){
   s.lock.Lock()
   defer s.lock.Unlock()
   copy(s.stack[1:], s.stack)
-  s.stack[0] = item;
-  s.length++;
+  s.stack[0] = item
+  s.length++
 }
 
+/**  Pop Method, remove front -- implicit return */
 func (s *Stack) Pop() (item interface{}){
-
+  s.lock.Lock()
+  defer s.lock.Unlock()
+  item, s.stack = s.stack[0], s.stack[1:]
+  s.length--
 }
 
-func (s *Stack) Peek(){
-
+/**  Peek Method, get index -- implicit return */
+func (s *Stack) Peek(n int) (item interface{}){
+  if n < s.length && n > -1 {
+    item = s.stack[n]
+  } else {
+    item = nil
+  }
 }
 
-func (s *Stack) Length(){
-
+/**  Length Method, simply returns */
+func (s *Stack) Length() int{
+  return s.length
 }
