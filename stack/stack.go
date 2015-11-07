@@ -29,12 +29,19 @@ func NewStack() *Stack {
 /**
   Flesh out the Stack struct
 */
-func (s *Stack) Push(item []interface{}) {
-  
+func (s *Stack) Push(item interface{}) {
+  s.lock.Lock()
+  defer s.lock.Unlock()
+  copy(s.stack[1:], s.stack)
+  s.stack[0] = item;
+  s.length++;
+}
+
+func (s *Stack) Pop() (item interface{}){
 
 }
 
-func (s *Stack) Pop(){
+func (s *Stack) Peek(){
 
 }
 
