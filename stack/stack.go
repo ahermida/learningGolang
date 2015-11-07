@@ -29,7 +29,8 @@ func NewStack() *Stack {
 /**
   Flesh out the Stack struct
 */
-func (s *Stack) Push(){
+func (s *Stack) Push(item []interface{}) {
+  
 
 }
 
