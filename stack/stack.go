@@ -1,5 +1,5 @@
 /**
-  An implementation of the Stack ADT
+  An implementation of the Stack ADT, Use slices (top is the last element in slice)
 */
 package stack
 
@@ -21,7 +21,7 @@ type Stack struct {
 */
 func NewStack() *Stack {
   s := &Stack{}
-  s.stack = make([]interface, 0)
+  s.stack = make([]interface{}, 0)
   s.length = 0
   return s
 }
@@ -34,8 +34,7 @@ func NewStack() *Stack {
 func (s *Stack) Push(item interface{}){
   s.lock.Lock()
   defer s.lock.Unlock()
-  copy(s.stack[1:], s.stack)
-  s.stack[0] = item
+  s.stack = append(s.stack, item)
   s.length++
 }
 
@@ -43,17 +42,19 @@ func (s *Stack) Push(item interface{}){
 func (s *Stack) Pop() (item interface{}){
   s.lock.Lock()
   defer s.lock.Unlock()
-  item, s.stack = s.stack[0], s.stack[1:]
+  item, s.stack = s.stack[s.length - 1], s.stack[:s.length - 2]
   s.length--
+  return
 }
 
 /**  Peek Method, get index -- implicit return */
 func (s *Stack) Peek(n int) (item interface{}){
-  if n < s.length && n > -1 {
-    item = s.stack[n]
+  if n < s.length - 1 && n > -1 {
+    item = s.stack[s.length - 1 - n]
   } else {
     item = nil
   }
+  return
 }
 
 /**  Length Method, simply returns */
