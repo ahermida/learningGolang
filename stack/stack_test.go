@@ -13,6 +13,7 @@ func TestNew(t *testing.T) {
   stack.Length()
   stack.Push("hello")
   stack.Push(1)
+  fmt.Printf("%d\n", len(stack.stack))
   if stack.stack[1] != 1 {
     t.Error()
   }
@@ -22,12 +23,16 @@ func TestNew(t *testing.T) {
      fmt.Printf("stack.stack")
      t.Error()
   }
+  fmt.Printf("%d\n", len(stack.stack))
   stack.Push("Yoo")
+  fmt.Printf("%d\n", len(stack.stack))
   popped := stack.Pop()
+  fmt.Printf("%d\n", len(stack.stack))
   if popped != "Yoo" {
     t.Error()
   }
   if stack.Length() != 4 {
+    fmt.Printf("%d", stack.Length())
     t.Error()
   }
 
