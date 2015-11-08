@@ -12,7 +12,10 @@ func TestNew(t *testing.T) {
   stack := NewStack()
   stack.Length()
   stack.Push("hello")
-  stack.Push(" sir, \n")
+  stack.Push(1)
+  if stack.stack[1] != 1 {
+    t.Error()
+  }
   stack.Push("How are you?\n")
   stack.Push("I'm well, you?")
   if stack.stack[0] != "hello" || stack.stack[3] != "I'm well, you?" {

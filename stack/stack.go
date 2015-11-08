@@ -30,7 +30,7 @@ func NewStack() *Stack {
   Flesh out the Stack struct
 */
 
-/**  Push Method, add to front*/
+/**  Push Method */
 func (s *Stack) Push(item interface{}){
   s.lock.Lock()
   defer s.lock.Unlock()
@@ -38,7 +38,7 @@ func (s *Stack) Push(item interface{}){
   s.length++
 }
 
-/**  Pop Method, remove front -- implicit return */
+/**  Pop Method */
 func (s *Stack) Pop() (item interface{}){
   s.lock.Lock()
   defer s.lock.Unlock()
@@ -47,7 +47,7 @@ func (s *Stack) Pop() (item interface{}){
   return
 }
 
-/**  Peek Method, get index -- implicit return */
+/**  Peek Method, get index */
 func (s *Stack) Peek(n int) (item interface{}){
   if n < s.length - 1 && n > -1 {
     item = s.stack[s.length - 1 - n]
