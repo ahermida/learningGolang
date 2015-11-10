@@ -8,20 +8,20 @@ import (
 func TestMinHeap(t *testing.T) {
 	h := NewHeap(false)
 
-	h.Insert(8)
-	h.Insert(7)
-	h.Insert(6)
-	h.Insert(3)
-	h.Insert(1)
-	h.Insert(0)
-	h.Insert(2)
-	h.Insert(5)
-	h.Insert(9)
-	h.Insert(20)
+	h.Insert("hello")
+	h.Insert("yo")
+	h.Insert("sup")
+	h.Insert("do")
+	h.Insert("it")
+	h.Insert("just")
+	h.Insert("jimmy")
+	h.Insert("russel")
+	h.Insert("supdude")
+	h.Insert("heyhey")
 
-	sorted := []int{}
+	sorted := []string{}
 	for len(h.heap) > 0 {
-		sorted = append(sorted, h.Extract().(int))
+		sorted = append(sorted, h.Extract().(string))
 	}
 	for i := 0; i < len(sorted)-2; i++ {
 		if sorted[i] > sorted[i+1] {
@@ -35,20 +35,20 @@ func TestMinHeap(t *testing.T) {
 func TestMaxHeap(t *testing.T) {
 	h := NewHeap(true)
 
-  	h.Insert(8)
-  	h.Insert(7)
-  	h.Insert(6)
-  	h.Insert(3)
-  	h.Insert(1)
-  	h.Insert(0)
-  	h.Insert(2)
-  	h.Insert(5)
-  	h.Insert(9)
-  	h.Insert(20)
-
-	sorted := []int{}
+	h.Insert("hello")
+	h.Insert("yo")
+	h.Insert("sup")
+	h.Insert("do")
+	h.Insert("it")
+	h.Insert("just")
+	h.Insert("jimmy")
+	h.Insert("russel")
+	h.Insert("supdude")
+	h.Insert("heyhey")
+	sorted := []string{}
 	for len(h.heap) > 0 {
-		sorted = append(sorted, h.Extract().(int))
+		sorted = append(sorted, h.Extract().(string))
+
 	}
 
 	for i := 0; i < len(sorted)-2; i++ {
@@ -58,4 +58,6 @@ func TestMaxHeap(t *testing.T) {
 		}
     t.Log(sorted)
 	}
+
+
 }

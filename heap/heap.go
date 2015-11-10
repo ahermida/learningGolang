@@ -44,7 +44,7 @@ func (h *Heap) Compare(a, b interface{}) bool {
       if h.min {
         return a.(string) <= b.(string)
       } else {
-        return b.(string) >= a.(string)
+        return b.(string) <= a.(string)
       }
     case int:
       if h.min {
