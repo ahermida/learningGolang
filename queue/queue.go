@@ -12,8 +12,7 @@ import "sync"
 */
 type Queue struct {
   queue  []interface{}
-  length int
-  lock   sync.Mutex
+  sync.Mutex
 }
 
 /**
@@ -22,7 +21,6 @@ type Queue struct {
 func NewQueue() *Queue {
   q := &Queue{}
   q.queue = make([]interface{}, 0)
-  q.length = 0
   return q
 }
 
@@ -31,32 +29,26 @@ func NewQueue() *Queue {
 */
 /**  Enqueue Method, add to back */
 func (q *Queue) Enqueue(item interface{}){
-  q.lock.Lock()
-  defer q.lock.Unlock()
+  q.Lock()
+  defer q.Unlock()
   q.queue = append(q.queue, item)
-  q.length++
 }
 
 /**  Dequeue Method remove from front */
 func (q *Queue) Dequeue() (item interface{}) {
-  q.lock.Lock()
-  defer q.lock.Unlock()
+  q.Lock()
+  defer q.Unlock()
   item, q.queue = q.queue[0], q.queue[1:]
-  q.length--
   return
 }
 
 /**  Peek Method, get index */
 func (q *Queue) Peek(n int) (item interface{}) {
-  if n < q.length - 1 && n > -1 {
-    item = q.queue[q.length - 1 - n]
-  } else {
-    item = nil
-  }
+  item = q.queue[n]
   return
 }
 
 /**  Length Method, simply returns */
 func (q *Queue) Length() int{
-  return q.length
+  return len(q.queue)
 }

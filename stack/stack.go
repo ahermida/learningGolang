@@ -12,7 +12,7 @@ import "sync"
 */
 type Stack struct {
   stack  []interface{}
-  lock   sync.Mutex
+  sync.Mutex
 }
 
 /**
@@ -30,15 +30,15 @@ func NewStack() *Stack {
 
 /**  Push Method, add to front*/
 func (s *Stack) Push(item interface{}){
-  s.lock.Lock()
-  defer s.lock.Unlock()
+  s.Lock()
+  defer s.Unlock()
   s.stack = append(s.stack, item)
 }
 
 /**  Pop Method */
 func (s *Stack) Pop() (item interface{}){
-  s.lock.Lock()
-  defer s.lock.Unlock()
+  s.Lock()
+  defer s.Unlock()
   //goes up to the last index, exclusive
   item, s.stack = s.stack[len(s.stack) - 1], s.stack[:len(s.stack) - 1]
   return

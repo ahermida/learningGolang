@@ -28,12 +28,14 @@ func TestNew(t *testing.T) {
     t.Error()
   }
   if queue.Length() != 4 {
-    fmt.Printf("%d", queue.length)
+    fmt.Printf("%d", len(queue.queue))
     t.Error()
   }
 
   peeked := queue.Peek(3)
   if peeked != "Yoo" {
-    //t.Error()
+    fmt.Printf(queue.queue[3].(string))
+    fmt.Printf("%d", queue.Length())
+    t.Error()
   }
 }

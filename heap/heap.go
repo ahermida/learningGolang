@@ -104,8 +104,14 @@ func (h *Heap) Extract() (item interface{}) {
 	return
 }
 
+/**
+  Reheap upwards after adding an element
+*/
 func (h *Heap) siftUp() {
 	for i, parent := len(h.heap)-1, len(h.heap)-1; i > 0; i = parent {
+		/* gets the parent because parent is floor of n/2
+			 ex: 4, which has the binary representation of 100 >> 1 = 2, which is 010
+		*/
 		parent = i >> 1
 		if h.Compare(h.heap[i], h.heap[parent]) {
 			h.heap[parent], h.heap[i] = h.heap[i], h.heap[parent]
@@ -115,9 +121,16 @@ func (h *Heap) siftUp() {
 	}
 }
 
+/**
+  Reheap downwards after adding an element
+*/
 func (h *Heap) siftDown() {
 	for i, child := 0, 1; i < len(h.heap) && i<<1+1 < len(h.heap); i = child {
 		child = i<<1 + 1
+		/* gets the right child because right child is of 2n + 1
+			 ex: 4, which has the binary representation of 100 << 1 = 8 + 1 = 9,
+			     which is represented as 1001 in binary (also, 2n+1 to 4).
+		*/
 
 		if child+1 <= len(h.heap)-1 && h.Compare(h.heap[child+1], h.heap[child]) {
 			child++
